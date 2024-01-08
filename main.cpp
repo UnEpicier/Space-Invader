@@ -6,17 +6,19 @@ int main()
 	window.setFramerateLimit(60);
 	window.setVerticalSyncEnabled(true);
 
+	Player player(window);
+	Inputs inputs(window, player);
+
 	while (window.isOpen())
 	{
 		Event event;
 		while (window.pollEvent(event))
 		{
-			if (event.type == Event::Closed)
-			{
-				window.close();
-			}
+			inputs.HandleInputs(event);
 
 			window.clear(Color::Black);
+
+			player.DrawPlayer();
 
 			window.display();
 		}

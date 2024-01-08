@@ -4,6 +4,9 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
+#include "Player.h";
+#include "Inputs.h";
+
 using namespace std;
 using namespace sf;
 
