@@ -1,0 +1,10 @@
+{
+  "name": "space-invader",
+  "version": "0.0.0",
+  "description": "Space Invader Copy",
+  "dependencies": [
+    {
+      "name": "sfml"
+    }
+  ]
+}
