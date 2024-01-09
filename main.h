@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Player.h";
+#include "Laser.h";
 #include "Inputs.h";
 
 using namespace std;

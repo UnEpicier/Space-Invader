@@ -1,19 +1,27 @@
 #include "Inputs.h"
 
-void Inputs::HandleInputs(Event& event) {
-	if (event.type == Event::Closed)
-	{
-		_window.close();
-		return;
+void Inputs::HandleInputs() {
+	// Player movements
+	if (Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::Q)) {
+		_player.move(-1);
 	}
 
-	// Player movements
-	if (event.type == Event::KeyPressed) {
-		if (event.key.code == Keyboard::Left || event.key.code == Keyboard::Q) {
-			_player.Move(-1);
+	if (Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::D)) {
+		_player.move(1);
+	}
+
+	if (Keyboard::isKeyPressed(Keyboard::Space)) {
+		if (_clock.getElapsedTime().asMilliseconds() > 500) {
+			const Vector2f playerPos = _player.PlayerShape.getPosition();
+			const float playerRadius = _player.PlayerShape.getRadius();
+
+			Laser laser;
+			laser.setInitialPosition(Vector2f(playerPos.x + playerRadius, playerPos.y - playerRadius));
+
+			_lasers.push_back(laser.getLaser());
+
+			_clock.restart();
 		}
-		if (event.key.code == Keyboard::Right || event.key.code == Keyboard::D) {
-			_player.Move(1);
-		}
+
 	}
 }

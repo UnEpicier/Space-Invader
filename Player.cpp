@@ -1,13 +1,13 @@
 #include "Player.h";
 
-void Player::DrawPlayer() {
+void Player::drawPlayer() {
 	PlayerShape.setFillColor(Color(52, 252, 5));
 	PlayerShape.setPosition(Vector2f(_window.getSize().x / 2 + _x, _window.getSize().y - PlayerShape.getScale().y - 50));
 
 	_window.draw(PlayerShape);
 }
 
-void Player::Move(int direction) {
+void Player::move(int direction) {
 	int result = _x + _velocity * direction;
 
 	int minX = _window.getSize().x / 2 * -1;

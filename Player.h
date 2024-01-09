@@ -13,8 +13,8 @@ public:
 
 	CircleShape PlayerShape = CircleShape(20, 3);
 
-	void DrawPlayer();
-	void Move(int direction);
+	void drawPlayer();
+	void move(int direction);
 
 private:
 	int _x = 0;
