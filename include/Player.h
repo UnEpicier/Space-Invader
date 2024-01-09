@@ -9,7 +9,7 @@ using namespace sf;
 class Player
 {
 public:
-	Player(int screenSize);
+	Player(Vector2u screenSize);
 
 	CircleShape getShape() { return _shape; };
 	void move(int direction);
@@ -17,6 +17,6 @@ public:
 private:
 	CircleShape _shape;
 
-	int _screenSize;
+	int _screenWidth;
 };
 

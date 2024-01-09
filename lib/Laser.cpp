@@ -2,7 +2,7 @@
 
 Laser::Laser()
 {
-	_laser = RectangleShape(Vector2f(2, 20));
+	_laser = RectangleShape(Vector2f(4, 30));
 	_laser.setFillColor(Color::White);
 }
 

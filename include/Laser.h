@@ -11,7 +11,7 @@ class Laser
 public:
 	Laser();
 
-	RectangleShape getLaser() { return _laser; }
+	RectangleShape& getShape() { return _laser; }
 	
 	void setInitialPosition(Vector2f position);
 
