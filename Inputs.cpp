@@ -12,8 +12,8 @@ void Inputs::HandleInputs() {
 
 	if (Keyboard::isKeyPressed(Keyboard::Space)) {
 		if (_clock.getElapsedTime().asMilliseconds() > 500) {
-			const Vector2f playerPos = _player.PlayerShape.getPosition();
-			const float playerRadius = _player.PlayerShape.getRadius();
+			const Vector2f playerPos = _player.getShape().getPosition();
+			const float playerRadius = _player.getShape().getRadius();
 
 			Laser laser;
 			laser.setInitialPosition(Vector2f(playerPos.x + playerRadius, playerPos.y - playerRadius));

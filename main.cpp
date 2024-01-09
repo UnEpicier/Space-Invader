@@ -2,11 +2,11 @@
 
 int main()
 {
-	RenderWindow window(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Space Invader", Style::Titlebar | Style::Close);
+	RenderWindow window(VideoMode(SCREEN_SIZE, SCREEN_SIZE), "Space Invader", Style::Titlebar | Style::Close);
 	window.setFramerateLimit(60);
 	window.setVerticalSyncEnabled(true);
 
-	Player player(window);
+	Player player(SCREEN_SIZE);
 	vector<RectangleShape> lasers;
 
 	Inputs inputs(player, lasers);
@@ -28,7 +28,7 @@ int main()
 		window.clear(Color::Black);
 
 		// Draw everything
-		player.drawPlayer();
+		window.draw(player.getShape());
 
 		for (vector<RectangleShape>::iterator it = lasers.begin(); it < lasers.end();) {
 			window.draw(*it);

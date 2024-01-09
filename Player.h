@@ -9,16 +9,14 @@ using namespace sf;
 class Player
 {
 public:
-	Player(RenderWindow& window): _window(window) {}
+	Player(int screenSize);
 
-	CircleShape PlayerShape = CircleShape(20, 3);
-
-	void drawPlayer();
+	CircleShape getShape() { return _shape; };
 	void move(int direction);
 
 private:
-	int _x = 0;
-	int _velocity = 7;
-	RenderWindow& _window;
+	CircleShape _shape;
+
+	int _screenSize;
 };
 

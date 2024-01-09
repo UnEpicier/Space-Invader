@@ -1,25 +1,19 @@
 #include "Player.h";
 
-void Player::drawPlayer() {
-	PlayerShape.setFillColor(Color(52, 252, 5));
-	PlayerShape.setPosition(Vector2f(_window.getSize().x / 2 + _x, _window.getSize().y - PlayerShape.getScale().y - 50));
-
-	_window.draw(PlayerShape);
+Player::Player(int screenSize): _screenSize(screenSize) {
+	_shape = CircleShape(20, 3);
+	_shape.setFillColor(Color(52, 252, 5));
+	_shape.setPosition(Vector2f(_screenSize / 2, _screenSize - _shape.getScale().y - 50));
 }
 
 void Player::move(int direction) {
-	int result = _x + _velocity * direction;
+	float max = _screenSize - (_shape.getRadius() * 2);
+	float result = 5 * direction;
 
-	int minX = _window.getSize().x / 2 * -1;
-	int maxX = _window.getSize().x / 2 - ((int)PlayerShape.getRadius() * 2);
+	// Prevent leaving the window
+	if (_shape.getPosition().x + result < 0 || _shape.getPosition().x + result > max) {
+		result = 0;		
+	}
 
-	if (result < minX) {
-		result = minX;
-	}
-	else if (result > maxX) {
-		result = maxX;
-	}
-	else {
-		_x = result;
-	}
+	_shape.move(result, 0);
 }
