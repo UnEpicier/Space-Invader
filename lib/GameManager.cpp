@@ -1,17 +1,38 @@
-#include "GameManager.h";
+#include "GameManager.h"
 
 GameManager::GameManager() {
 	_window.setVerticalSyncEnabled(true);
 
 	for (int i = 0; i < 4; i++) {
 		Shield* shield = new Shield(_window);
-		shield->setPosition(Vector2f(_window.getSize().x / 4.25 * i, _window.getSize().y * 0.9));
+		shield->setPosition(Vector2f(_window.getSize().x / 4.25f * i, _window.getSize().y * 0.9f));
 
 		_shields.push_back(shield);
+	}
+
+	const int rows = 3;
+	const int cols = 6;
+	const int distX = 135;
+	const int distY = 85;
+
+	for (int row = 0; row < rows; row++) {
+		for (int col = 0; col < cols; col++) {
+			Vector2f position(col * distX + alienScreenMargin + 1, row * distY + alienScreenMargin);
+			Alien* alien = new Alien(position);
+
+			_aliens.push_back(alien);
+		}
 	}
 }
 
 void GameManager::run() {
+	int alienDirection = 1;
+	const float alienXStep = 10;
+	const int moveDownStep = 5;
+	int moveDown = 0;
+
+	Clock alienClock;
+
 	while (_window.isOpen()) {
 		
 		Event event;
@@ -32,6 +53,30 @@ void GameManager::run() {
 		for (auto shield : _shields) {
 			_window.draw(shield->getShape());
 		}
+
+		for (Alien* alien : _aliens) {
+			const FloatRect bounds = alien->getShape().getGlobalBounds();
+
+			if (bounds.left + bounds.width >= _window.getSize().x - alienScreenMargin || bounds.left <= alienScreenMargin) {
+				alienDirection *= -1;
+				moveDown = moveDownStep;
+				break;
+			}
+		}
+
+		for (Alien* alien : _aliens) {
+			_window.draw(alien->getShape());
+		}
+
+
+		if (alienClock.getElapsedTime().asMilliseconds() >= 500) {
+			for (Alien* alien : _aliens) {
+				alien->getShape().move(alienXStep * alienDirection, moveDown);
+			}
+			alienClock.restart();
+		}
+		moveDown = 0;
+
 
 		for (vector<Laser *>::iterator it = _lasers.begin(); it < _lasers.end();) {
 			_window.draw((*it)->getShape());
@@ -99,6 +144,16 @@ void GameManager::handleLasersCollision() {
 				break;
 			}
 			++shieldIt;
+		}
+
+		for (vector<Alien*>::iterator alienIt = _aliens.begin(); alienIt < _aliens.end();) {
+			if ((*laserIt)->getShape().getGlobalBounds().intersects((*alienIt)->getShape().getGlobalBounds())) {
+				delete* alienIt;
+				alienIt = _aliens.erase(alienIt);
+				deleteLaser = true;
+				break;
+			}
+			++alienIt;
 		}
 
 		if (deleteLaser) {

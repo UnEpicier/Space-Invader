@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Laser.h"
 #include "Shield.h"
+#include "Alien.h"
 
 using namespace std;
 using namespace sf;
@@ -21,6 +22,8 @@ public:
 private:
 	Clock _clock;
 
+	const int alienScreenMargin = 50;
+
 	//RenderWindow _window{ VideoMode::getFullscreenModes()[0], "Space Invader", Style::Fullscreen };
 	RenderWindow _window{ VideoMode(1024, 800), "Space Invader", Style::Close | Style::Titlebar};
 
@@ -28,5 +31,6 @@ private:
 
 	vector<Laser*> _lasers;
 	vector<Shield*> _shields;
+	vector<Alien*> _aliens;
 };
 

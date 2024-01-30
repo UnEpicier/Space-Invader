@@ -141,6 +141,7 @@
     <None Include="vcpkg.json" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="lib\Alien.cpp" />
     <ClCompile Include="lib\GameManager.cpp" />
     <ClCompile Include="lib\Laser.cpp" />
     <ClCompile Include="lib\Shield.cpp" />
@@ -148,6 +149,7 @@
     <ClCompile Include="lib\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Alien.h" />
     <ClInclude Include="include\GameManager.h" />
     <ClInclude Include="include\Laser.h" />
     <ClInclude Include="include\Player.h" />
