@@ -10,7 +10,6 @@ using namespace std;
 class Shield
 {
 public:
-	Shield() {};
 	Shield(Window& window);
 
 	void setPosition(Vector2f position);

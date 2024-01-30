@@ -9,7 +9,6 @@ using namespace sf;
 class Laser
 {
 public:
-	Laser() {};
 	Laser(Window& window);
 
 	RectangleShape& getShape() { return _laser; }
